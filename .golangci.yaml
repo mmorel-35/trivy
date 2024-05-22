@@ -113,6 +113,10 @@ issues:
         - misspell
         - tenv
         - unused
+    - path: ".*_test.go$"
+      linters:
+        - govet
+      text: "copylocks:"
     - linters:
         - gosec
       text: "G304: Potential file inclusion"
