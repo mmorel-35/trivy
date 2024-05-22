@@ -109,7 +109,6 @@ issues:
         - gocritic
         - goconst
         - gosec
-        - govet
         - ineffassign
         - misspell
         - tenv
