@@ -3,7 +3,6 @@ package report_test
 import (
 	"bytes"
 	"context"
-	"os"
 	"testing"
 	"time"
 
