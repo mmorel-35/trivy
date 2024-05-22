@@ -87,7 +87,7 @@ func Test_evaluateVariable(t *testing.T) {
 	}
 
 	envName := "TEST_GO_DEP_PARSER"
-	os.Setenv(envName, "1.2.3")
+	t.Setenv(envName, "1.2.3")
 	defer os.Unsetenv(envName)
 
 	for _, tt := range tests {
