@@ -11,7 +11,7 @@ import (
 
 func Test_Array_Empty(t *testing.T) {
 	example := []byte(`[]`)
-	var []int target
+	var target []int
 	metadata := types.NewTestMetadata()
 	require.NoError(t, Unmarshal(example, &target, &metadata))
 	assert.Empty(t, target)
@@ -19,7 +19,7 @@ func Test_Array_Empty(t *testing.T) {
 
 func Test_Array_ToSlice(t *testing.T) {
 	example := []byte(`[1, 2, 3]`)
-	var []int target
+	var target []int
 	metadata := types.NewTestMetadata()
 	require.NoError(t, Unmarshal(example, &target, &metadata))
 	assert.Len(t, target, 3)
