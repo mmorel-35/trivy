@@ -668,7 +668,7 @@ func TestPom_Parse(t *testing.T) {
 		},
 		{
 			// mvn dependency:tree
-			// [INFO] com.example:hard:jar:1.0.0
+			//[INFO] com.example:hard:jar:1.0.0
 			//[INFO] +- org.example:example-nested:jar:3.3.4:compile
 			//[INFO] \- org.example:example-dependency:jar:1.2.3:compile
 			//[INFO]    \- org.example:example-api:jar:2.0.0:compile
