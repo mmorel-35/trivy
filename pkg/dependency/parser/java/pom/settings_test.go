@@ -65,7 +65,7 @@ func Test_ReadSettings(t *testing.T) {
 			// $ mvn help:effective-settings
 			//[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
 			//[INFO] --- maven-help-plugin:3.4.0:effective-settings (default-cli) @ standalone-pom ---
-			// Effective user-specific configuration settings:
+			//Effective user-specific configuration settings:
 			//
 			//<?xml version="1.0" encoding="UTF-8"?>
 			//<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
