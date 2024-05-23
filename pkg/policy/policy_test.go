@@ -70,15 +70,15 @@ func TestClient_LoadBuiltinPolicies(t *testing.T) {
 			name:     "happy path",
 			cacheDir: "testdata/happy",
 			want: []string{
-				"testdata/happy/policy/content/kubernetes",
-				"testdata/happy/policy/content/docker",
+				filepath.Join("testdata", "happy", "policy", "content", "kubernetes"),
+				filepath.Join("testdata", "happy", "policy", "content", "docker"),
 			},
 		},
 		{
 			name:     "empty roots",
 			cacheDir: "testdata/empty",
 			want: []string{
-				"testdata/empty/policy/content",
+				filepath.Join("testdata", "empty", "policy", "content"),
 			},
 		},
 		{
