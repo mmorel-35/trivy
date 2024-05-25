@@ -269,6 +269,7 @@ func Test_newServeMux(t *testing.T) {
 				req.Header = tt.header
 				client := new(http.Client)
 				resp, err = client.Do(req)
+				require.NoError(t, err)
 			}
 
 			require.NoError(t, err)
