@@ -111,7 +111,6 @@ issues:
         - govet
         - ineffassign
         - misspell
-        - unused
     - path: ".*_test.go$"
       linters:
         - gocritic
