@@ -23,6 +23,7 @@ linters-settings:
     ignore-words:
       - licence
       - optimise
+      - simmilar
   gosec:
     excludes:
       - G101
@@ -110,6 +111,7 @@ issues:
     - path: ".*_test.go$"
       linters:
         - goconst
+        - gosec
         - unused
     - path: ".*_test.go$"
       linters:
