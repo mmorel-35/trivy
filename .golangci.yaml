@@ -81,6 +81,7 @@ linters:
   disable-all: true
   enable:
     - bodyclose
+    - errcheck
     - gci
     - goconst
     - gocritic
@@ -130,5 +131,4 @@ issues:
       linters:
         - gocritic
       text: "importShadow:"
-  exclude-use-default: false
   max-same-issues: 0
