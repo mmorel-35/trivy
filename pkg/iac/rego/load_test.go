@@ -33,8 +33,8 @@ func Test_RegoScanning_WithSomeInvalidPolicies(t *testing.T) {
 			options.ScannerWithRegoErrorLimits(0),
 			options.ScannerWithDebug(&debugBuf),
 		)
-
-		err := scanner.LoadPolicies(false, false, testEmbedFS, []string{"."}, nil)
+		ctx := context.TODO()
+		err := scanner.LoadPolicies(ctx, false, false, testEmbedFS, []string{"."}, nil)
 		require.ErrorContains(t, err, `want (one of): ["Cmd" "EndLine" "Flags" "JSON" "Original" "Path" "Stage" "StartLine" "SubCmd" "Value"]`)
 		assert.Contains(t, debugBuf.String(), "Error(s) occurred while loading checks")
 	})
@@ -46,8 +46,8 @@ func Test_RegoScanning_WithSomeInvalidPolicies(t *testing.T) {
 			options.ScannerWithRegoErrorLimits(1),
 			options.ScannerWithDebug(&debugBuf),
 		)
-
-		err := scanner.LoadPolicies(false, false, testEmbedFS, []string{"."}, nil)
+		ctx := context.TODO()
+		err := scanner.LoadPolicies(ctx, false, false, testEmbedFS, []string{"."}, nil)
 		require.NoError(t, err)
 
 		assert.Contains(t, debugBuf.String(), "Error occurred while parsing: testdata/policies/invalid.rego, testdata/policies/invalid.rego:7")
@@ -63,8 +63,8 @@ deny {
     input.evil == "foo bar"
 }`
 		scanner := rego.NewScanner(types.SourceJSON)
-
-		err := scanner.LoadPolicies(false, false, fstest.MapFS{}, []string{"."}, []io.Reader{strings.NewReader(check)})
+		ctx := context.TODO()
+		err := scanner.LoadPolicies(ctx, false, false, fstest.MapFS{}, []string{"."}, []io.Reader{strings.NewReader(check)})
 		assert.ErrorContains(t, err, "could not find schema \"fooschema\"")
 	})
 
@@ -78,14 +78,14 @@ deny {
     input.evil == "foo bar"
 }`
 		scanner := rego.NewScanner(types.SourceJSON)
-
+		ctx := context.TODO()
 		fsys := fstest.MapFS{
 			"schemas/fooschema.json": &fstest.MapFile{
 				Data: []byte("bad json"),
 			},
 		}
 
-		err := scanner.LoadPolicies(false, false, fsys, []string{"."}, []io.Reader{strings.NewReader(check)})
+		err := scanner.LoadPolicies(ctx, false, false, fsys, []string{"."}, []io.Reader{strings.NewReader(check)})
 		assert.ErrorContains(t, err, "could not parse schema \"fooschema\"")
 	})
 
@@ -96,7 +96,8 @@ deny {
     input.evil == "foo bar"
 }`
 		scanner := rego.NewScanner(types.SourceJSON)
-		err := scanner.LoadPolicies(false, false, fstest.MapFS{}, []string{"."}, []io.Reader{strings.NewReader(check)})
+		ctx := context.TODO()
+		err := scanner.LoadPolicies(ctx, false, false, fstest.MapFS{}, []string{"."}, []io.Reader{strings.NewReader(check)})
 		require.NoError(t, err)
 	})
 
@@ -185,6 +186,7 @@ deny {
 				options.ScannerWithRegoErrorLimits(0),
 				options.ScannerWithEmbeddedPolicies(false),
 			)
+			ctx := context.TODO()
 
 			tt.files["schemas/fooschema.json"] = &fstest.MapFile{
 				Data: []byte(`{
@@ -200,7 +202,7 @@ deny {
 
 			fsys := fstest.MapFS(tt.files)
 			checks.EmbeddedPolicyFileSystem = embeddedChecksFS
-			err := scanner.LoadPolicies(false, false, fsys, []string{"."}, nil)
+			err := scanner.LoadPolicies(ctx, false, false, fsys, []string{"."}, nil)
 
 			if tt.expectedErr != "" {
 				assert.ErrorContains(t, err, tt.expectedErr)
@@ -244,6 +246,7 @@ deny {
 		types.SourceDockerfile,
 		options.ScannerWithEmbeddedPolicies(false),
 	)
-	err := scanner.LoadPolicies(false, false, fsys, []string{"."}, nil)
+	ctx := context.TODO()
+	err := scanner.LoadPolicies(ctx, false, false, fsys, []string{"."}, nil)
 	require.Error(t, err)
 }
