@@ -137,7 +137,7 @@ func (s *Scanner) ScanFile(ctx context.Context, fsys fs.FS, path string) (scan.R
 	})
 }
 
-func (s *Scanner) initRegoScanner(srcFS fs.FS) (*rego.Scanner, error) {
+func (s *Scanner) initRegoScanner(ctx context.Context, srcFS fs.FS) (*rego.Scanner, error) {
 	s.Lock()
 	defer s.Unlock()
 	if s.regoScanner != nil {
@@ -145,7 +145,7 @@ func (s *Scanner) initRegoScanner(srcFS fs.FS) (*rego.Scanner, error) {
 	}
 	regoScanner := rego.NewScanner(types.SourceTOML, s.options...)
 	regoScanner.SetParentDebugLogger(s.debug)
-	if err := regoScanner.LoadPolicies(s.loadEmbeddedLibraries, s.loadEmbeddedPolicies, srcFS, s.policyDirs, s.policyReaders); err != nil {
+	if err := regoScanner.LoadPolicies(ctx, s.loadEmbeddedLibraries, s.loadEmbeddedPolicies, srcFS, s.policyDirs, s.policyReaders); err != nil {
 		return nil, err
 	}
 	s.regoScanner = regoScanner
