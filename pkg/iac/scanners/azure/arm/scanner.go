@@ -105,7 +105,7 @@ func (s *Scanner) SetDataDirs(...string)           {}
 func (s *Scanner) SetPolicyNamespaces(...string)   {}
 func (s *Scanner) SetRegoErrorLimit(_ int)         {}
 
-func (s *Scanner) initRegoScanner(srcFS fs.FS) error {
+func (s *Scanner) initRegoScanner(ctx context.Context, srcFS fs.FS) error {
 	s.Lock()
 	defer s.Unlock()
 	if s.regoScanner != nil {
@@ -113,7 +113,7 @@ func (s *Scanner) initRegoScanner(srcFS fs.FS) error {
 	}
 	regoScanner := rego.NewScanner(types.SourceCloud, s.scannerOptions...)
 	regoScanner.SetParentDebugLogger(s.debug)
-	if err := regoScanner.LoadPolicies(s.loadEmbeddedLibraries, s.loadEmbeddedPolicies, srcFS, s.policyDirs, s.policyReaders); err != nil {
+	if err := regoScanner.LoadPolicies(ctx, s.loadEmbeddedLibraries, s.loadEmbeddedPolicies, srcFS, s.policyDirs, s.policyReaders); err != nil {
 		return err
 	}
 	s.regoScanner = regoScanner
@@ -126,7 +126,7 @@ func (s *Scanner) ScanFS(ctx context.Context, fsys fs.FS, dir string) (scan.Resu
 	if err != nil {
 		return nil, err
 	}
-	if err := s.initRegoScanner(fsys); err != nil {
+	if err := s.initRegoScanner(ctx, fsys); err != nil {
 		return nil, err
 	}
 
