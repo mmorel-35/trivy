@@ -2,6 +2,7 @@ package rego_test
 
 import (
 	"bytes"
+	"context"
 	"embed"
 	"fmt"
 	"io"
