@@ -73,7 +73,7 @@ func (s *Scanner) loadEmbedded() error {
 	return nil
 }
 
-func (s *Scanner) LoadPolicies(enableEmbeddedLibraries, enableEmbeddedPolicies bool, srcFS fs.FS, paths []string, readers []io.Reader) error {
+func (s *Scanner) LoadPolicies(ctx context.Context, enableEmbeddedLibraries, enableEmbeddedPolicies bool, srcFS fs.FS, paths []string, readers []io.Reader) error {
 
 	if s.policies == nil {
 		s.policies = make(map[string]*ast.Module)
@@ -141,7 +141,7 @@ func (s *Scanner) LoadPolicies(enableEmbeddedLibraries, enableEmbeddedPolicies b
 	}
 	s.store = store
 
-	return s.compilePolicies(srcFS, paths)
+	return s.compilePolicies(ctx, srcFS, paths)
 }
 
 func (s *Scanner) fallbackChecks(compiler *ast.Compiler) {
@@ -228,7 +228,7 @@ func (s *Scanner) prunePoliciesWithError(compiler *ast.Compiler) error {
 	return nil
 }
 
-func (s *Scanner) compilePolicies(srcFS fs.FS, paths []string) error {
+func (s *Scanner) compilePolicies(ctx context.Context, srcFS fs.FS, paths []string) error {
 
 	schemaSet, custom, err := BuildSchemaSetFromPolicies(s.policies, paths, srcFS)
 	if err != nil {
@@ -249,11 +249,11 @@ func (s *Scanner) compilePolicies(srcFS fs.FS, paths []string) error {
 		if err := s.prunePoliciesWithError(compiler); err != nil {
 			return err
 		}
-		return s.compilePolicies(srcFS, paths)
+		return s.compilePolicies(ctx, srcFS, paths)
 	}
 	retriever := NewMetadataRetriever(compiler)
 
-	if err := s.filterModules(retriever); err != nil {
+	if err := s.filterModules(ctx, retriever); err != nil {
 		return err
 	}
 	if s.inputSchema != nil {
@@ -265,7 +265,7 @@ func (s *Scanner) compilePolicies(srcFS fs.FS, paths []string) error {
 			if err := s.prunePoliciesWithError(compiler); err != nil {
 				return err
 			}
-			return s.compilePolicies(srcFS, paths)
+			return s.compilePolicies(ctx, srcFS, paths)
 		}
 	}
 	s.compiler = compiler
@@ -273,11 +273,11 @@ func (s *Scanner) compilePolicies(srcFS fs.FS, paths []string) error {
 	return nil
 }
 
-func (s *Scanner) filterModules(retriever *MetadataRetriever) error {
+func (s *Scanner) filterModules(ctx context.Context, retriever *MetadataRetriever) error {
 
 	filtered := make(map[string]*ast.Module)
 	for name, module := range s.policies {
-		meta, err := retriever.RetrieveMetadata(context.TODO(), module)
+		meta, err := retriever.RetrieveMetadata(ctx, module)
 		if err != nil {
 			return err
 		}
