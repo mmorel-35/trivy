@@ -170,7 +170,7 @@ func (s *Scanner) initRegoScanner(ctx context.Context, srcFS fs.FS) (*rego.Scann
 }
 
 func (s *Scanner) scanRego(ctx context.Context, srcFS fs.FS, inputs ...rego.Input) (scan.Results, error) {
-	regoScanner, err := s.initRegoScanner(srcFS)
+	regoScanner, err := s.initRegoScanner(ctx, srcFS)
 	if err != nil {
 		return nil, err
 	}
