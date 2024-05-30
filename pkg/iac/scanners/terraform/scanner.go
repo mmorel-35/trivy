@@ -166,7 +166,7 @@ func (s *Scanner) ScanFS(ctx context.Context, target fs.FS, dir string) (scan.Re
 		return nil, nil
 	}
 
-	regoScanner, err := s.initRegoScanner(target)
+	regoScanner, err := s.initRegoScanner(ctx, target)
 	if err != nil {
 		return nil, err
 	}
