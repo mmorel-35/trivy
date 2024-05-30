@@ -196,7 +196,7 @@ exception[ns] {
 	ctx := context.TODO()
 	require.NoError(
 		t,
-		scanner.LoadPolicies(ctx. false, false, srcFS, []string{"policies"}, nil),
+		scanner.LoadPolicies(ctx, false, false, srcFS, []string{"policies"}, nil),
 	)
 
 	results, err := scanner.ScanInput(ctx, Input{
