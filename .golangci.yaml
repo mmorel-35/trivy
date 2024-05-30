@@ -81,6 +81,7 @@ linters:
   disable-all: true
   enable:
     - bodyclose
+    - contextcheck
     - gci
     - goconst
     - gocritic
