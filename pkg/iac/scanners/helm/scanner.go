@@ -125,7 +125,7 @@ func (s *Scanner) SetRegoErrorLimit(_ int)   {}
 
 func (s *Scanner) ScanFS(ctx context.Context, target fs.FS, path string) (scan.Results, error) {
 
-	if err := s.initRegoScanner(target); err != nil {
+	if err := s.initRegoScanner(ctx, target); err != nil {
 		return nil, fmt.Errorf("failed to init rego scanner: %w", err)
 	}
 
@@ -225,7 +225,7 @@ func (s *Scanner) getScanResults(path string, ctx context.Context, target fs.FS)
 	return results, nil
 }
 
-func (s *Scanner) initRegoScanner(srcFS fs.FS) error {
+func (s *Scanner) initRegoScanner(ctx context.Context, srcFS fs.FS) error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	if s.regoScanner != nil {
@@ -233,7 +233,7 @@ func (s *Scanner) initRegoScanner(srcFS fs.FS) error {
 	}
 	regoScanner := rego.NewScanner(types.SourceKubernetes, s.options...)
 	regoScanner.SetParentDebugLogger(s.debug)
-	if err := regoScanner.LoadPolicies(s.loadEmbeddedLibraries, s.loadEmbeddedPolicies, srcFS, s.policyDirs, s.policyReaders); err != nil {
+	if err := regoScanner.LoadPolicies(ctx, s.loadEmbeddedLibraries, s.loadEmbeddedPolicies, srcFS, s.policyDirs, s.policyReaders); err != nil {
 		return err
 	}
 	s.regoScanner = regoScanner
