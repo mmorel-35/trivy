@@ -59,7 +59,7 @@ func FromString(s string) (*PackageURL, error) {
 	return lo.ToPtr(PackageURL(p)), nil
 }
 
-// nolint: gocyclo
+//nolint:gocyclo
 func New(t ftypes.TargetType, metadata types.Metadata, pkg ftypes.Package) (*PackageURL, error) {
 	qualifiers := parseQualifier(pkg)
 	pkg.Epoch = 0 // we moved Epoch to qualifiers so we don't need it in version
@@ -130,7 +130,7 @@ func (p *PackageURL) Unwrap() *packageurl.PackageURL {
 }
 
 // LangType returns an application type in Trivy
-// nolint: gocyclo
+//nolint:gocyclo
 func (p *PackageURL) LangType() ftypes.LangType {
 	switch p.Type {
 	case packageurl.TypeComposer:

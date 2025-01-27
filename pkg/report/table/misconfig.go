@@ -87,12 +87,12 @@ func (r *misconfigRenderer) countSeverities() map[string]int {
 }
 
 func (r *misconfigRenderer) printf(format string, args ...any) {
-	// nolint
+	//nolint:errcheck
 	_ = tml.Fprintf(r.w, format, args...)
 }
 
 func (r *misconfigRenderer) println(input string) {
-	// nolint
+	//nolint:errcheck
 	tml.Fprintln(r.w, input)
 }
 

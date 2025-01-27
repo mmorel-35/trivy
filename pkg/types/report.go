@@ -3,7 +3,7 @@ package types
 import (
 	"time"
 
-	v1 "github.com/google/go-containerregistry/pkg/v1" // nolint: goimports
+	v1 "github.com/google/go-containerregistry/pkg/v1" //nolint:goimports
 
 	"github.com/aquasecurity/trivy/pkg/fanal/artifact"
 	ftypes "github.com/aquasecurity/trivy/pkg/fanal/types"

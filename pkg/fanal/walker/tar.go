@@ -91,7 +91,7 @@ func (w LayerTar) Walk(layer io.Reader, analyzeFn WalkFunc) ([]string, []string,
 func (w LayerTar) processFile(filePath string, tr *tar.Reader, fi fs.FileInfo, analyzeFn WalkFunc) error {
 	cf := newCachedFile(fi.Size(), tr)
 	defer func() {
-		// nolint
+		//nolint:errcheck
 		_ = cf.Clean()
 	}()
 

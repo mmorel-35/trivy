@@ -115,7 +115,7 @@ func (p *parser) newNode(k Kind, parentMetadata *types.Metadata) (*node, *types.
 func (n *node) updateMetadata(prefix string) {
 
 	var full string
-	// nolint:gocritic
+	//nolint:gocritic
 	if strings.HasPrefix(n.ref, "[") {
 		full = prefix + n.ref
 	} else if prefix != "" {

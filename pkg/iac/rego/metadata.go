@@ -351,7 +351,7 @@ func (m *MetadataRetriever) RetrieveMetadata(ctx context.Context, module *ast.Mo
 	return metadata, nil
 }
 
-// nolint: gocyclo
+//nolint:gocyclo
 func (m *MetadataRetriever) queryInputOptions(ctx context.Context, module *ast.Module) InputOptions {
 
 	options := InputOptions{

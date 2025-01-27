@@ -149,7 +149,7 @@ func IsOutputToTerminal(output io.Writer) bool {
 
 func RenderTarget(w io.Writer, target string, isTerminal bool) {
 	if isTerminal {
-		// nolint
+		//nolint:errcheck
 		_ = tml.Fprintf(w, "\n<underline><bold>%s</bold></underline>\n\n", target)
 	} else {
 		_, _ = fmt.Fprintf(w, "\n%s\n", target)

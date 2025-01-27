@@ -100,7 +100,7 @@ func (r pkgLicenseRenderer) countSeverities() map[string]int {
 }
 
 func (r *pkgLicenseRenderer) printf(format string, args ...any) {
-	// nolint
+	//nolint:errcheck
 	_ = tml.Fprintf(r.w, format, args...)
 }
 
@@ -202,7 +202,7 @@ func (r fileLicenseRenderer) countSeverities() map[string]int {
 }
 
 func (r *fileLicenseRenderer) printf(format string, args ...any) {
-	// nolint
+	//nolint:errcheck
 	_ = tml.Fprintf(r.w, format, args...)
 }
 

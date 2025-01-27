@@ -291,19 +291,19 @@ func ConvertToRPCVulns(vulns []types.DetectedVulnerability) []*common.Vulnerabil
 
 		var lastModifiedDate, publishedDate *timestamppb.Timestamp
 		if vuln.LastModifiedDate != nil {
-			lastModifiedDate = timestamppb.New(*vuln.LastModifiedDate) // nolint: errcheck
+			lastModifiedDate = timestamppb.New(*vuln.LastModifiedDate) //nolint:errcheck
 		}
 
 		if vuln.PublishedDate != nil {
-			publishedDate = timestamppb.New(*vuln.PublishedDate) // nolint: errcheck
+			publishedDate = timestamppb.New(*vuln.PublishedDate) //nolint:errcheck
 		}
 
 		var customAdvisoryData, customVulnData *structpb.Value
 		if vuln.Custom != nil {
-			customAdvisoryData, _ = structpb.NewValue(vuln.Custom) // nolint: errcheck
+			customAdvisoryData, _ = structpb.NewValue(vuln.Custom) //nolint:errcheck
 		}
 		if vuln.Vulnerability.Custom != nil {
-			customVulnData, _ = structpb.NewValue(vuln.Vulnerability.Custom) // nolint: errcheck
+			customVulnData, _ = structpb.NewValue(vuln.Vulnerability.Custom) //nolint:errcheck
 		}
 
 		rpcVulns = append(rpcVulns, &common.Vulnerability{

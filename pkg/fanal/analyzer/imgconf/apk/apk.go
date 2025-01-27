@@ -107,7 +107,6 @@ func (a alpineCmdAnalyzer) fetchApkIndexArchive(targetOS types.OS) (*apkIndex, e
 		}
 		defer reader.(*builtinos.File).Close()
 	} else {
-		// nolint
 		resp, err := http.Get(url)
 		if err != nil {
 			return nil, xerrors.Errorf("failed to fetch APKINDEX archive: %w", err)

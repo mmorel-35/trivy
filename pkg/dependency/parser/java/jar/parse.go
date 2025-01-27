@@ -3,7 +3,7 @@ package jar
 import (
 	"archive/zip"
 	"bufio"
-	"crypto/sha1" // nolint:gosec
+	"crypto/sha1" //nolint:gosec
 	"encoding/hex"
 	"errors"
 	"io"
@@ -215,7 +215,7 @@ func (p *Parser) parseInnerJar(zf *zip.File, rootPath string) ([]ftypes.Package,
 	}
 
 	// build full path to inner jar
-	fullPath := path.Join(rootPath, zf.Name) // nolint:gosec
+	fullPath := path.Join(rootPath, zf.Name) //nolint:gosec
 	if !strings.HasPrefix(fullPath, path.Clean(rootPath)) {
 		return nil, nil, nil // zip slip
 	}
@@ -234,7 +234,7 @@ func (p *Parser) searchBySHA1(r io.ReadSeeker, filePath string) (Properties, err
 		return Properties{}, xerrors.Errorf("file seek error: %w", err)
 	}
 
-	h := sha1.New() // nolint:gosec
+	h := sha1.New() //nolint:gosec
 	if _, err := io.Copy(h, r); err != nil {
 		return Properties{}, xerrors.Errorf("unable to calculate SHA-1: %w", err)
 	}

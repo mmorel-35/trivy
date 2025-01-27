@@ -102,7 +102,6 @@ func ConvertTerraformDocument(modules terraform.Modules, block *terraform.Block)
 	return &wrappedDocument{Document: builder.Build(), Source: block}, nil
 }
 
-// nolint
 func parseStatement(statementBlock *terraform.Block) iamgo.Statement {
 
 	metadata := statementBlock.GetMetadata()

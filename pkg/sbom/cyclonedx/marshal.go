@@ -415,7 +415,7 @@ func (*Marshaler) cwes(cweIDs []string) *[]int {
 }
 
 func (m *Marshaler) ratings(vuln core.Vulnerability) *[]cdx.VulnerabilityRating {
-	rates := make([]cdx.VulnerabilityRating, 0) // nolint:gocritic // To export an empty array in JSON
+	rates := make([]cdx.VulnerabilityRating, 0) //nolint:gocritic // To export an empty array in JSON
 	for sourceID, severity := range vuln.VendorSeverity {
 		// When the vendor also provides CVSS score/vector
 		if cvss, ok := vuln.CVSS[sourceID]; ok {

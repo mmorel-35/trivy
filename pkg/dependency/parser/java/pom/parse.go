@@ -122,7 +122,7 @@ func (p *Parser) Parse(r xio.ReadSeekerAt) ([]ftypes.Package, []ftypes.Dependenc
 	return p.parseRoot(rootArt, set.New[string]())
 }
 
-// nolint: gocyclo
+//nolint:gocyclo
 func (p *Parser) parseRoot(root artifact, uniqModules set.Set[string]) ([]ftypes.Package, []ftypes.Dependency, error) {
 	// Prepare a queue for dependencies
 	queue := newArtifactQueue()

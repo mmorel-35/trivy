@@ -81,6 +81,8 @@ linters-settings:
       - licence
       - optimise
       - simmilar
+  nolintlint:
+    require-specific: true
   perfsprint:
     # Optimizes even if it requires an int or uint type cast.
     int-conversion: false
@@ -111,6 +113,7 @@ linters:
     - govet
     - ineffassign
     - misspell
+    - nolintlint
     - perfsprint
     - revive
     - tenv

@@ -36,7 +36,6 @@ const (
 var matchers = make(map[FileType]func(name string, r io.ReadSeeker) bool)
 
 // TODO(nikita): refactor. If the file matches the schema, it no longer needs to be checked for other scanners.
-// nolint
 func init() {
 
 	matchers[FileTypeJSON] = func(name string, r io.ReadSeeker) bool {

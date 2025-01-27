@@ -460,7 +460,7 @@ func (m *wasmModule) Analyze(ctx context.Context, input analyzer.AnalysisInput) 
 	if err != nil {
 		return nil, xerrors.Errorf("failed to write string to memory: %w", err)
 	}
-	defer m.free.Call(ctx, inputPtr) // nolint: errcheck
+	defer m.free.Call(ctx, inputPtr) //nolint:errcheck
 
 	analyzeRes, err := m.analyze.Call(ctx, inputPtr, inputSize)
 	if err != nil {

@@ -91,7 +91,8 @@ func lookupOriginLayerForLib(filePath string, lib ftypes.Package, layers []ftype
 }
 
 // ApplyLayers returns the merged layer
-// nolint: gocyclo
+//
+//nolint:gocyclo
 func ApplyLayers(layers []ftypes.BlobInfo) ftypes.ArtifactDetail {
 	sep := "/"
 	nestedMap := nested.Nested{}
@@ -101,10 +102,10 @@ func ApplyLayers(layers []ftypes.BlobInfo) ftypes.ArtifactDetail {
 	for _, layer := range layers {
 		for _, opqDir := range layer.OpaqueDirs {
 			opqDir = strings.TrimSuffix(opqDir, sep)  // this is necessary so that an empty element is not contribute into the array of the DeleteByString function
-			_ = nestedMap.DeleteByString(opqDir, sep) // nolint
+			_ = nestedMap.DeleteByString(opqDir, sep) //nolint:errcheck
 		}
 		for _, whFile := range layer.WhiteoutFiles {
-			_ = nestedMap.DeleteByString(whFile, sep) // nolint
+			_ = nestedMap.DeleteByString(whFile, sep) //nolint:errcheck
 		}
 
 		mergedLayer.OS.Merge(layer.OS)
@@ -166,7 +167,7 @@ func ApplyLayers(layers []ftypes.BlobInfo) ftypes.ArtifactDetail {
 		}
 	}
 
-	// nolint
+	//nolint:errcheck
 	_ = nestedMap.Walk(func(keys []string, value any) error {
 		switch v := value.(type) {
 		case ftypes.PackageInfo:

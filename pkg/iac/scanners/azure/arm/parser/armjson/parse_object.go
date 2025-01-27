@@ -32,7 +32,7 @@ func (p *parser) parseObject(parentMetadata *types.Metadata) (Node, error) {
 
 }
 
-// nolint: gocyclo
+//nolint:gocyclo
 func (p *parser) iterateObject(nextComments []Node, metadata *types.Metadata, n *node) (Node, error) {
 	for {
 

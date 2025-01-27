@@ -1,7 +1,7 @@
 package digest
 
 import (
-	"crypto/sha1" // nolint
+	"crypto/sha1"
 	"crypto/sha256"
 	"fmt"
 	"hash"
@@ -64,7 +64,7 @@ func (d Digest) sepIndex() int {
 func CalcSHA1(r io.ReadSeeker) (Digest, error) {
 	defer r.Seek(0, io.SeekStart)
 
-	h := sha1.New() // nolint
+	h := sha1.New()
 	if _, err := io.Copy(h, r); err != nil {
 		return "", xerrors.Errorf("unable to calculate sha1 digest: %w", err)
 	}

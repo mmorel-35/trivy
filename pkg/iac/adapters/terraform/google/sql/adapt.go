@@ -80,7 +80,6 @@ func adaptInstance(resource *terraform.Block) sql.DatabaseInstance {
 	return instance
 }
 
-// nolint
 func adaptFlags(resources terraform.Blocks, flags *sql.Flags) {
 	for _, resource := range resources {
 

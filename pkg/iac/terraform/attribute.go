@@ -320,7 +320,6 @@ func (a *Attribute) AsStringValues() iacTypes.StringValueList {
 	return a.getStringValues(a.hclAttribute.Expr, a.ctx.Inner())
 }
 
-// nolint
 func (a *Attribute) getStringValues(expr hcl.Expression, ctx *hcl.EvalContext) (results []iacTypes.StringValue) {
 
 	defer func() {
@@ -951,7 +950,6 @@ func (a *Attribute) ReferencesBlock(b *Block) bool {
 	return false
 }
 
-// nolint
 func (a *Attribute) AllReferences(blocks ...*Block) []*Reference {
 	if a == nil {
 		return nil
@@ -967,7 +965,6 @@ func (a *Attribute) AllReferences(blocks ...*Block) []*Reference {
 	return refs
 }
 
-// nolint
 func (a *Attribute) referencesFromExpression(expression hcl.Expression) []*Reference {
 	var refs []*Reference
 	switch t := expression.(type) {

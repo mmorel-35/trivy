@@ -24,7 +24,7 @@ func NewApplier(c cache.LocalArtifactCache) Applier {
 func (a *applier) ApplyLayers(imageID string, layerKeys []string) (ftypes.ArtifactDetail, error) {
 	var layers []ftypes.BlobInfo
 	for _, key := range layerKeys {
-		blob, _ := a.cache.GetBlob(key) // nolint
+		blob, _ := a.cache.GetBlob(key)
 		if blob.SchemaVersion == 0 {
 			return ftypes.ArtifactDetail{}, xerrors.Errorf("layer cache missing: %s", key)
 		}
@@ -33,7 +33,7 @@ func (a *applier) ApplyLayers(imageID string, layerKeys []string) (ftypes.Artifa
 
 	mergedLayer := ApplyLayers(layers)
 
-	imageInfo, _ := a.cache.GetArtifact(imageID) // nolint
+	imageInfo, _ := a.cache.GetArtifact(imageID)
 	mergedLayer.ImageConfig = ftypes.ImageConfigDetail{
 		Packages:         imageInfo.HistoryPackages,
 		Misconfiguration: imageInfo.Misconfiguration,

@@ -687,7 +687,7 @@ func (f *Flags) Bind(cmd *cobra.Command) error {
 	return nil
 }
 
-// nolint: gocyclo
+//nolint:gocyclo
 func (f *Flags) ToOptions(args []string) (Options, error) {
 	var err error
 	opts := Options{

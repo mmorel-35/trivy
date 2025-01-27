@@ -69,7 +69,7 @@ func (r *secretRenderer) countSeverities() map[string]int {
 }
 
 func (r *secretRenderer) printf(format string, args ...any) {
-	// nolint
+	//nolint:errcheck
 	_ = tml.Fprintf(r.w, format, args...)
 }
 

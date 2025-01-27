@@ -86,7 +86,7 @@ func (p *Parser) addTarToFS(archivePath string) (fs.FS, error) {
 				continue
 			}
 
-			symlinks[targetPath] = path.Join(path.Dir(targetPath), link) // nolint:gosec // virtual file system is used
+			symlinks[targetPath] = path.Join(path.Dir(targetPath), link) //nolint:gosec // virtual file system is used
 		default:
 			return nil, fmt.Errorf("header type %q is not supported", header.Typeflag)
 		}
