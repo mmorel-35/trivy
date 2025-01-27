@@ -5,7 +5,7 @@ import _ "embed"
 type Schema string
 
 var (
-	None     Schema = ""
+	None     Schema
 	Anything Schema = `{}`
 
 	//go:embed dockerfile.json
