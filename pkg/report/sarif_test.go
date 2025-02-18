@@ -784,8 +784,6 @@ func TestToPathUri(t *testing.T) {
 
 	for _, test := range tests {
 		got := report.ToPathUri(test.input, test.resultClass)
-		if got != test.output {
-			t.Errorf("toPathUri(%q) got %q, wanted %q", test.input, got, test.output)
-		}
+		assert.Equalf(t, got, test.output, "toPathUri(%q) got %q, wanted %q", test.input, got, test.output)
 	}
 }

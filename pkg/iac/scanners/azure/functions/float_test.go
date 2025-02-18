@@ -1,6 +1,10 @@
 package functions
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func Test_Float(t *testing.T) {
 	tests := []struct {
@@ -28,9 +32,7 @@ func Test_Float(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := Float(tt.args...)
-			if got != tt.expected {
-				t.Errorf("Float() = %v, want %v", got, tt.expected)
-			}
+			assert.InDeltaf(t, tt.expected, got, 0, "Float() = %v, want %v", got, tt.expected)
 		})
 	}
 }

@@ -429,8 +429,12 @@ func TestScanner_Detect(t *testing.T) {
 
 			s := redhat.NewScanner()
 			got, err := s.Detect(nil, tt.args.osVer, nil, tt.args.pkgs)
-			require.Equal(t, tt.wantErr, err != nil, err)
-			assert.Equal(t, tt.want, got)
+			if tt.wantErr {
+				require.Error(t, err)
+			} else {
+				require.NoError(t, err)
+				assert.Equal(t, tt.want, got)
+			}
 		})
 	}
 }

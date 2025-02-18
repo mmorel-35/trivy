@@ -40,7 +40,7 @@ func TestDockerImage(t *testing.T) {
 			require.NoError(t, err)
 
 			_, cleanup, err := DockerImage(ref, "")
-			assert.Equal(t, tt.wantErr, err != nil, err)
+			assert.Equal(t, tt.wantErr, err != nil, "%+v", err)
 			defer func() {
 				if cleanup != nil {
 					cleanup()

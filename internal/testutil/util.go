@@ -23,7 +23,7 @@ func AssertRuleFound(t *testing.T, ruleID string, results scan.Results, message 
 			m := result.Metadata()
 			meta := &m
 			for meta != nil {
-				assert.NotNil(t, meta.Range(), 0)
+				require.NotNil(t, meta.Range())
 				assert.Positive(t, meta.Range().GetStartLine())
 				assert.Positive(t, meta.Range().GetEndLine())
 				meta = meta.Parent()

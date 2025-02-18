@@ -105,7 +105,7 @@ func TestFSCache_GetBlob(t *testing.T) {
 			}()
 
 			got, err := fs.GetBlob(tt.args.layerID)
-			assert.Equal(t, tt.wantErr, err != nil, err)
+			assert.Equal(t, tt.wantErr, err != nil, "%+v", err)
 			assert.Equal(t, tt.want, got)
 		})
 	}

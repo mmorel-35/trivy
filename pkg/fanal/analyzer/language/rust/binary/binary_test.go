@@ -103,7 +103,7 @@ func Test_rustBinaryLibraryAnalyzer_Required(t *testing.T) {
 			fileInfo, err := os.Lstat(tt.filePath)
 			require.NoError(t, err)
 			got := a.Required(tt.filePath, fileInfo)
-			assert.Equal(t, tt.want, got, fileInfo.Mode().Perm())
+			assert.Equal(t, tt.want, got, "%+v", fileInfo.Mode().Perm())
 		})
 	}
 }

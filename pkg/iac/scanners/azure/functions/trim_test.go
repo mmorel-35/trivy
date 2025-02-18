@@ -1,6 +1,10 @@
 package functions
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func Test_Trim(t *testing.T) {
 	tests := []struct {
@@ -63,9 +67,7 @@ hello
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			actual := Trim(tt.args...)
-			if actual != tt.expected {
-				t.Errorf("Trim(%v) = %v, expected %v", tt.args, actual, tt.expected)
-			}
+			assert.Equalf(t, tt.expected, actual, "Trim(%v) = %v, expected %v", tt.args, actual, tt.expected)
 		})
 	}
 }

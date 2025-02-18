@@ -302,7 +302,7 @@ func TestGet(t *testing.T) {
 
 			_, err = Get(context.Background(), n, tt.args.option)
 			if tt.wantErr != "" {
-				assert.ErrorContains(t, err, tt.wantErr, err)
+				assert.ErrorContains(t, err, tt.wantErr, "%+v", err)
 				return
 			}
 			require.NoError(t, err)

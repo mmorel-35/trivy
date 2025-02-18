@@ -15,9 +15,7 @@ func Test_ContextVariables(t *testing.T) {
 	ctx := NewContext(underlying, nil)
 
 	val, err := gocty.ToCtyValue("hello", cty.String)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	ctx.Set(val, "my", "value")
 	value := underlying.Variables["my"].AsValueMap()["value"]
@@ -40,9 +38,7 @@ func Test_ContextVariablesPreservation(t *testing.T) {
 	ctx := NewContext(underlying, nil)
 
 	val, err := gocty.ToCtyValue("hello", cty.String)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	ctx.Set(val, "my", "value")
 	assert.Equal(t, "hello", underlying.Variables["my"].AsValueMap()["value"].AsString())
@@ -104,9 +100,7 @@ func Test_ContextVariablesPreservationByDot(t *testing.T) {
 	ctx := NewContext(underlying, nil)
 
 	val, err := gocty.ToCtyValue("hello", cty.String)
-	if err != nil {
-		t.Fatal(err)
-	}
+	require.NoError(t, err)
 
 	ctx.SetByDot(val, "my.something.value")
 	assert.Equal(t, "hello", underlying.Variables["my"].AsValueMap()["something"].AsValueMap()["value"].AsString())

@@ -61,7 +61,7 @@ func TestTryOCI(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			_, err := tryOCI(test.ociImagePath)
 			if test.wantErr != "" {
-				require.ErrorContains(t, err, test.wantErr, err)
+				require.ErrorContains(t, err, test.wantErr, "%+v", err)
 			} else {
 				require.NoError(t, err)
 			}

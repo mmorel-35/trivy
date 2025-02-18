@@ -1375,7 +1375,7 @@ func TestEncoder_Encode(t *testing.T) {
 
 			require.Len(t, got.Components(), len(tt.wantComponents))
 			for id, want := range tt.wantComponents {
-				assert.EqualExportedValues(t, *want, *got.Components()[id], id)
+				assert.EqualExportedValues(t, *want, *got.Components()[id], "%+v", id)
 			}
 
 			assert.Equal(t, tt.wantRels, got.Relationships())

@@ -2,7 +2,6 @@ package ecr
 
 import (
 	"context"
-	"errors"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -93,9 +92,7 @@ func TestCheckOptions(t *testing.T) {
 		a := &ECR{}
 		ecrClient, err := a.CheckOptions(v.domain, types.RegistryOptions{})
 		if err != nil {
-			if !errors.Is(err, v.wantErr) {
-				t.Errorf("[%s]\nexpected error based on %v\nactual : %v", testname, v.wantErr, err)
-			}
+			require.ErrorIsf(t, err, v.wantErr, "[%s]\nexpected error based on %v\nactual : %v", testname, v.wantErr, err)
 			continue
 		}
 
@@ -152,14 +149,8 @@ func TestECRGetCredential(t *testing.T) {
 			Client: mockedECR{Resp: c.Resp},
 		}
 		username, password, err := e.GetCredential(context.Background())
-		if err != nil {
-			t.Fatalf("%d, unexpected error", err)
-		}
-		if username != c.expectedUser {
-			t.Fatalf("%d, username: expected %s, got %s", i, c.expectedUser, username)
-		}
-		if password != c.expectedPassword {
-			t.Fatalf("%d, password: expected %s, got %s", i, c.expectedPassword, password)
-		}
+		require.NoErrorf(t, err, "%d, unexpected error", err)
+		require.Equalf(t, c.expectedUser, username, "%d, username: expected %s, got %s", i, c.expectedUser, username)
+		require.Equalf(t, c.expectedPassword, password, "%d, password: expected %s, got %s", i, c.expectedPassword, password)
 	}
 }

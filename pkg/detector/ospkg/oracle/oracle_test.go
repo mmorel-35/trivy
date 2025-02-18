@@ -85,9 +85,7 @@ func TestScanner_IsSupportedVersion(t *testing.T) {
 		t.Run(testName, func(t *testing.T) {
 			ctx := clock.With(context.Background(), tt.now)
 			actual := s.IsSupportedVersion(ctx, tt.osFamily, tt.osVersion)
-			if actual != tt.expected {
-				t.Errorf("[%s] got %v, want %v", testName, actual, tt.expected)
-			}
+			assert.Equalf(t, tt.expected, actual, "[%s] got %v, want %v", testName, actual, tt.expected)
 		})
 	}
 

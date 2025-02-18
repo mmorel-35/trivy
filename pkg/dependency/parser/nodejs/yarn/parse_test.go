@@ -90,17 +90,11 @@ func TestParsePattern(t *testing.T) {
 			continue
 		}
 
-		if gotName != v.expectName {
-			t.Errorf("name mismatch: got %s, want %s, target :%s", gotName, v.expectName, v.target)
-		}
+		assert.Equalf(t, gotName, v.expectName, "name mismatch: got %s, want %s, target :%s", gotName, v.expectName, v.target)
 
-		if gotProtocol != v.expectProtocol {
-			t.Errorf("protocol mismatch: got %s, want %s, target :%s", gotProtocol, v.expectProtocol, v.target)
-		}
+		assert.Equalf(t, gotProtocol, v.expectProtocol, "protocol mismatch: got %s, want %s, target :%s", gotProtocol, v.expectProtocol, v.target)
 
-		if gotVersion != v.expactVersion {
-			t.Errorf("version mismatch: got %s, want %s, target :%s", gotVersion, v.expactVersion, v.target)
-		}
+		assert.Equalf(t, gotVersion, v.expactVersion, "version mismatch: got %s, want %s, target :%s", gotVersion, v.expactVersion, v.target)
 	}
 }
 
@@ -171,13 +165,9 @@ func TestParsePackagePatterns(t *testing.T) {
 			continue
 		}
 
-		if gotName != v.expectName {
-			t.Errorf("name mismatch: got %s, want %s, target: %s", gotName, v.expectName, v.target)
-		}
+		assert.Equalf(t, gotName, v.expectName, "name mismatch: got %s, want %s, target: %s", gotName, v.expectName, v.target)
 
-		if gotProtocol != v.expectProtocol {
-			t.Errorf("protocol mismatch: got %s, want %s, target: %s", gotProtocol, v.expectProtocol, v.target)
-		}
+		assert.Equalf(t, gotProtocol, v.expectProtocol, "protocol mismatch: got %s, want %s, target: %s", gotProtocol, v.expectProtocol, v.target)
 
 		sort.Strings(gotPatterns)
 		sort.Strings(v.expactPatterns)
@@ -240,13 +230,9 @@ func TestGetDependency(t *testing.T) {
 			continue
 		}
 
-		if gotName != v.expectName {
-			t.Errorf("name mismatch: got %s, want %s, target: %s", gotName, v.expectName, v.target)
-		}
+		assert.Equalf(t, gotName, v.expectName, "name mismatch: got %s, want %s, target: %s", gotName, v.expectName, v.target)
 
-		if gotVersion != v.expactVersion {
-			t.Errorf("version mismatch: got %s, want %s, target: %s", gotVersion, v.expactVersion, v.target)
-		}
+		assert.Equalf(t, gotVersion, v.expactVersion, "version mismatch: got %s, want %s, target: %s", gotVersion, v.expactVersion, v.target)
 	}
 }
 

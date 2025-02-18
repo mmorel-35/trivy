@@ -1,6 +1,10 @@
 package functions
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func Test_Int(t *testing.T) {
 	tests := []struct {
@@ -28,9 +32,7 @@ func Test_Int(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := Int(tt.args...)
-			if got != tt.expected {
-				t.Errorf("Int() = %v, want %v", got, tt.expected)
-			}
+			assert.Equalf(t, tt.expected, got, "Int() = %v, want %v", got, tt.expected)
 		})
 	}
 }

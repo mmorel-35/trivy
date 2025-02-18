@@ -6,6 +6,8 @@ import (
 	"io/fs"
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/aquasecurity/trivy/internal/testutil"
 	"github.com/aquasecurity/trivy/pkg/iac/rules"
 	"github.com/aquasecurity/trivy/pkg/iac/scanners/terraform/executor"
@@ -15,20 +17,15 @@ import (
 func BenchmarkCalculate(b *testing.B) {
 
 	f, err := createBadBlocks()
-	if err != nil {
-		b.Fatal(err)
-	}
+	require.NoError(b, err)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		p := parser.New(f, "", parser.OptionStopOnHCLError(true))
-		if err := p.ParseFS(context.TODO(), "project"); err != nil {
-			b.Fatal(err)
-		}
+		err := p.ParseFS(context.TODO(), "project")
+		require.NoError(b, err)
 		modules, _, err := p.EvaluateAll(context.TODO())
-		if err != nil {
-			b.Fatal(err)
-		}
+		require.NoError(b, err)
 		executor.New().Execute(context.TODO(), modules, "project")
 	}
 }

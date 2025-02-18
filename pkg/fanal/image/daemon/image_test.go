@@ -245,8 +245,13 @@ func Test_image_ConfigFile(t *testing.T) {
 			defer cleanup()
 
 			conf, err := img.ConfigFile()
-			require.Equal(t, tt.wantErr, err != nil, err)
-			assert.Equal(t, tt.want, conf)
+
+			if tt.wantErr {
+				require.Error(t, err)
+			} else {
+				require.NoError(t, err)
+				assert.Equal(t, tt.want, conf)
+			}
 		})
 	}
 }
@@ -290,7 +295,7 @@ func Test_image_LayerByDiffID(t *testing.T) {
 			defer cleanup()
 
 			_, err = img.LayerByDiffID(tt.args.h)
-			assert.Equal(t, tt.wantErr, err != nil, err)
+			assert.Equal(t, tt.wantErr, err != nil, "%+v", err)
 		})
 	}
 }
@@ -319,7 +324,7 @@ func Test_image_RawConfigFile(t *testing.T) {
 			defer cleanup()
 
 			got, err := img.RawConfigFile()
-			assert.Equal(t, tt.wantErr, err != nil, err)
+			assert.Equal(t, tt.wantErr, err != nil, "%+v", err)
 
 			if err != nil {
 				return

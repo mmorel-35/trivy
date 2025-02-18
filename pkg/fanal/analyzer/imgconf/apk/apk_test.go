@@ -1594,13 +1594,10 @@ func TestResolveDependency(t *testing.T) {
 	analyzer := alpineCmdAnalyzer{}
 	for testName, v := range tests {
 		f, err := os.Open(v.apkIndexArchivePath)
-		if err != nil {
-			t.Fatalf("unexpected error: %s", err)
-		}
+		require.NoErrorf(t, err, "unexpected error: %s", err)
 		apkIndexArchive := &apkIndex{}
-		if err = json.NewDecoder(f).Decode(&apkIndexArchive); err != nil {
-			t.Fatalf("unexpected error: %s", err)
-		}
+		err = json.NewDecoder(f).Decode(&apkIndexArchive)
+		require.NoErrorf(t, err, "unexpected error: %s", err)
 		circularDependencyCheck := set.New[string]()
 		pkgs := analyzer.resolveDependency(apkIndexArchive, v.pkgName, circularDependencyCheck)
 		got := set.New(pkgs...)
@@ -1707,8 +1704,6 @@ func TestGuessVersion(t *testing.T) {
 	analyzer := alpineCmdAnalyzer{}
 	for testName, v := range tests {
 		actual := analyzer.guessVersion(v.apkIndexArchive, v.pkgs, v.createdAt)
-		if !reflect.DeepEqual(v.expected, actual) {
-			t.Errorf("[%s]\n%s", testName, pretty.Compare(v.expected, actual))
-		}
+		assert.Truef(t, reflect.DeepEqual(v.expected, actual), "[%s]\n%s", testName, pretty.Compare(v.expected, actual))
 	}
 }

@@ -5,6 +5,9 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestIsGzip(t *testing.T) {
@@ -21,14 +24,10 @@ func TestIsGzip(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.in, func(t *testing.T) {
 			f, err := os.Open(tt.in)
-			if err != nil {
-				t.Fatalf("unknown error: %s", err)
-			}
+			require.NoErrorf(t, err, "unknown error: %s", err)
 
 			got := IsGzip(bufio.NewReader(f))
-			if got != tt.want {
-				t.Errorf("got %t, want %t", got, tt.want)
-			}
+			assert.Equalf(t, tt.want, got, "got %t, want %t", got, tt.want)
 		})
 	}
 }

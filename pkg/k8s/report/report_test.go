@@ -585,17 +585,13 @@ func TestReport_consolidate(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			consolidateReport := tt.report.consolidate()
 
-			if len(consolidateReport.Findings) != len(tt.expectedFindings) {
-				t.Errorf("expected %d findings, got %d", len(tt.expectedFindings), len(consolidateReport.Findings))
-			}
+			assert.Lenf(t, tt.expectedFindings, len(consolidateReport.Findings), "expected %d findings, got %d", len(tt.expectedFindings), len(consolidateReport.Findings))
 
 			for _, f := range consolidateReport.Findings {
 				key := f.fullname()
 
 				expected, found := tt.expectedFindings[key]
-				if !found {
-					t.Errorf("key not found: %s", key)
-				}
+				assert.Truef(t, found, "key not found: %s", key)
 
 				assert.Equal(t, expected, f)
 			}
@@ -828,10 +824,10 @@ func Test_separateMisconfigReports(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			reports := SeparateMisconfigReports(tt.k8sReport, tt.scanners)
-			assert.Equal(t, len(tt.expectedReports), len(reports))
+			assert.Len(t, reports, len(tt.expectedReports))
 
 			for i := range reports {
-				assert.Equal(t, len(tt.expectedReports[i].Resources), len(reports[i].Report.Resources))
+				assert.Len(t, reports[i].Report.Resources, len(tt.expectedReports[i].Resources))
 				for j, m := range tt.expectedReports[i].Resources {
 					assert.Equal(t, m.Kind, reports[i].Report.Resources[j].Kind)
 				}

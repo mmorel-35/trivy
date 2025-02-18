@@ -397,7 +397,7 @@ func TestNewDockerImageWithPrivateRegistry(t *testing.T) {
 			defer cleanup()
 
 			if tt.wantErr != "" {
-				require.ErrorContains(t, err, tt.wantErr, err)
+				require.ErrorContains(t, err, tt.wantErr, "%+v", err)
 			} else {
 				require.NoError(t, err)
 			}
@@ -546,7 +546,7 @@ func TestDockerPlatformArguments(t *testing.T) {
 			defer cleanup()
 
 			if tt.wantErr != "" {
-				assert.ErrorContains(t, err, tt.wantErr, err)
+				assert.ErrorContains(t, err, tt.wantErr, "%+v", err)
 			} else {
 				require.NoError(t, err)
 			}

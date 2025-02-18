@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/aquasecurity/trivy/pkg/log"
 )
@@ -201,9 +202,7 @@ func TestSlogtest(t *testing.T) {
 				continue
 			}
 			m, err := parseLogLine(line)
-			if err != nil {
-				t.Fatalf("Failed to parse log line: %v", err)
-			}
+			require.NoErrorf(t, err, "Failed to parse log line: %v", err)
 			return m
 		}
 		return nil

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_Raw(t *testing.T) {
@@ -26,11 +27,9 @@ func Test_Raw(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if val, ok := pseudoParameters[tt.key]; ok {
-				assert.Equal(t, tt.expected, val.getRawValue())
-			} else {
-				t.Fatal("unexpected parameter key")
-			}
+			val, ok := pseudoParameters[tt.key]
+			require.False(t, ok, "unexpected parameter key")
+			assert.Equal(t, tt.expected, val.getRawValue())
 		})
 	}
 }

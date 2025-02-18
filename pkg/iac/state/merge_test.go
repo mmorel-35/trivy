@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/aquasecurity/trivy/pkg/iac/providers/aws"
 	"github.com/aquasecurity/trivy/pkg/iac/providers/aws/ec2"
@@ -330,9 +331,7 @@ func Test_Merging(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			state := test.b
 			actual, err := test.a.Merge(&state)
-			if err != nil {
-				t.Fatal(err)
-			}
+			require.NoError(t, err)
 			assert.Equal(t, test.expected, *actual)
 		})
 	}
