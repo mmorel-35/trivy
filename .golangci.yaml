@@ -90,14 +90,25 @@ linters:
       max-open-files: 2048
       # https://github.com/mgechev/revive/blob/HEAD/RULES_DESCRIPTIONS.md
       rules:
+        - name: blank-imports
+          disabled: true
         - name: bool-literal-in-expr
         - name: context-as-argument
           arguments:
             - allowTypesBefore: "*testing.T"
+        - name: context-keys-type
+        - name: dot-imports
         - name: duplicated-imports
         - name: early-return
           arguments:
-            - preserve-scope
+            - preserveScope
+        - name: empty-block
+          disabled: true
+        - name: error-naming
+          disabled: true
+        - name: error-return
+        - name: error-strings
+        - name: errorf
         - name: if-return
         - name: increment-decrement
         - name: indent-error-flow
@@ -105,13 +116,28 @@ linters:
             - preserve-scope
         - name: range
         - name: range-val-address
+        - name: receiver-naming
+          disabled: true
+        - name: redefines-builtin-id
         - name: superfluous-else
           arguments:
             - preserve-scope
         - name: time-equal
+        - name: time-naming
+        - name: unexported-return
+          disabled: true
         - name: unnecessary-stmt
+        - name: unreachable-code
         - name: unused-parameter
         - name: use-any
+        - name: var-declaration
+        - name: var-naming
+          disabled: true
+          arguments:
+            - ["ID"] # AllowList
+            - ["VM"] # DenyList
+            - - upper-case-const: true
+                skip-package-name-checks: true
 
     testifylint:
       enable-all: true
@@ -175,7 +201,6 @@ linters:
 
 run:
   go: '1.24'
-  timeout: 30m
 
 formatters:
   enable:
