@@ -120,6 +120,7 @@ linters:
 
   enable:
     - bodyclose
+    - contextcheck
     - depguard
     - goconst
     - gocritic
